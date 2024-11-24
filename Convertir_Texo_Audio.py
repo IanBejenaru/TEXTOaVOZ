@@ -6,6 +6,37 @@
 # Paso 1: cargar las librerías necesarias.
 import pyttsx3
 
+# Creamos la función que va a inicializar el audio:
+def textoVoz(texto):
+        # Inicializamos el convertidor de texto a voz:
+        engine = pyttsx3.init()
+        # Le decimos lo que queremos que convierta a voz:
+        engine.say(texto)
+        # Iniciamos el audio:
+        engine.runAndWait()
+
+
+# Creamos la función que nos va a permitir leer lineas de un TXT:
+def leerLineasTXT(archivo):
+        # INPUT
+        # archivo: es el título del archivo que tenemos que leer.
+        # OUTPUT: El texto línea por línea.
+
+        # abrimos el archivo:
+        book = open(archivo)
+        # Leemos el archivo entero y lo guardamos en una variable:
+        book_text= book.readlines()
+        # Creamos un bucle for que recorrerá línea por línea lo que tenemos
+        for line in book_text:
+            # Llamamos a la función que nos va a permitir leer el texto
+            textoVoz(line)
+  
+
+# Creamos la función que nos va a permitir leer el texto de una página web:
+def leerPaginaWeb(archivo):
+    # abrimos el archivo:
+    book = open(archivo)
+
 # Creamos un menú en el que el usuario pueda decidir si quiere escribir un texto para que se lea, que pille el texto de un archivo .txt 
 # o que lo lea de una pagina web
 # variable que nos permite salir del bulce:
@@ -17,21 +48,18 @@ while salir:
     if opcion =="1":
         # Creamos una variable en la que el usuario va a escribir un texto que quiera ser leído:
         texto_usuario = input("Escribe un texto que quieres que se lea: ")
-        # Inicializamos el convertidor de texto a voz:
-        engine = pyttsx3.init()
-        # Le decimos lo que queremos que convierta a voz:
-        engine.say(texto_usuario)
-        # Iniciamos el audio:
-        engine.runAndWait()
+        # Llamamos a la función que nos va a permitir leer el texto
+        textoVoz(texto_usuario)
     elif opcion == "2":
         # Pedimos al usuario que elija un archivo txt que quiere leer de su PC:
-        var =1
+        leerLineasTXT("archivoPrueba.txt")
     elif opcion == "3":
         # Pedimos al usuario que pegue el link de la pagina web que quiere leer:
         pagina =1
     # Opción salir del programa:
     elif opcion == "4":
-        print("Saliendo del programa....")
+        # Llamamos a la función que nos va a permitir leer el texto
+        textoVoz("Saliendo del programa....")
         salir = False
     # Cuando se selecciona una opcion que no existe:
     else:
